@@ -4,7 +4,9 @@
   <% @posts.each do |post| %>
     <li>
       <strong><%= post.title %></strong>
-      <p>Author: <%= post.user.name %></p> <!-- Assuming the User model has a 'name' attribute -->
+      <% if user_signed_in? %>
+        <p>Author: <%= post.user.name %></p>
+      <% end %>
     </li>
   <% end %>
 </ul>
