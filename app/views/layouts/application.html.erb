@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MembersOnly</title>
+    <title>Devisefromscratch</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
+   <body>
+    <div class="flashes">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
 
-  <body>
-    <%= yield %>
-  </body> 
-
-
-
+    <nav>
+      <div class="nav-home">
+        <%= link_to "Members Only!", root_path, class: "nav-button home" %>
+      </div>
+      <div class="nav-controls">
+        <% if user_signed_in? %>
+          <%= link_to "New Post", new_post_path, class: "nav-button inverted" %>
+          <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-button" %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path, class: "nav-button" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "nav-button" %>
+        <% end %>
+      </div>
+    </nav>
+    
+    <div class="content">
+      <%= yield %>
+    </div>
+  </body>
 </html>

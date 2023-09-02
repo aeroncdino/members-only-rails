@@ -4,7 +4,7 @@
   <% @posts.each do |post| %>
     <li>
       <strong><%= post.title %></strong>
-      <% if user_signed_in? %>
+      <% if current_user %>
         <p>Author: <%= post.user.name %></p>
       <% end %>
     </li>

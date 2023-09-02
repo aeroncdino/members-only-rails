@@ -3,18 +3,21 @@ class PostsController < ApplicationController
 
 
     def new
-        @posts = Post.new
+        @post = Post.new
     end
 
     def create
-         @posts = current_user.posts.build(post_params)
-
-        if @posts.save
-            redirect_to posts_path, notice: 'Post was successfully created.'
+        @post = current_user.posts.build(post_params)
+      
+        if @post.save
+          flash[:success] = 'Post successfully created.'
+          redirect_to posts_path
         else
-            render :new
+          flash.now[:error] = 'Failed to create the post. Please check the errors below.'
+          render 'new'
         end
     end
+      
 
     def index
         @posts = Post.all 
