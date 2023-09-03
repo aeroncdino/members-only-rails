@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   root 'posts#index' # Set a root route if needed.
 
   devise_scope :user do
-    delete 'custom_sign_out', to: 'devise/sessions#destroy'
-    get 'sign_out_redirected', to: 'posts#index' # Custom route to redirect after sign-out
+    get '/users/sign_out' => 'devise/sessions#destroy'
   end
 end
