@@ -3,8 +3,11 @@
   <% @posts.each do |post| %>
     <li>
       <strong><%= post.title %></strong>
-      <% if post.user %>
-        <p>Author: <%= post.user.name %></p>
+      <% if user_signed_in? %>
+        <p>Author: <%= post.user.name if post.user.present? %></p>
+        <p><%= post.content if post.user.present? %></p>
+      <% else %>
+        <p>No Author Found</p>
       <% end %>
     </li>
   <% end %>

@@ -1,11 +1,10 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create]
-
-
+    
     def new
-        @post = Post.new
+      @post = Post.new
     end
-
+    
     def create
         @post = current_user.posts.build(post_params)
       
@@ -16,14 +15,16 @@ class PostsController < ApplicationController
           flash.now[:error] = 'Failed to create the post. Please check the errors below.'
           render 'new'
         end
-    end
-      
+      end
+    
     def index
-        @posts = Post.all 
+      @posts = Post.all
     end
-
+    
     private
+    
     def post_params
-        params.require(:post).permit(:title, :content)
+      params.require(:post).permit(:name,:title, :content)
     end
-end
+  end
+  
